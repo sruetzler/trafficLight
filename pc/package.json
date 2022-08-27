@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bluetooth-scanner": "^1.0.1",
+    "bluetooth-serial-port": "^3.0.0"
+  }
+}
