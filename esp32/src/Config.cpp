@@ -5,7 +5,7 @@
 
 #include <ArduinoJson.h>
 
-const String configFileName="/configPedestrianTrafficLight.json";
+const String configFileName="/configTL.json";
 const String configVersion="1.0.0";
 
 void convertVersion(String version, int aVersion[3]){

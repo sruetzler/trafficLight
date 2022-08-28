@@ -22,7 +22,7 @@ btSerial.on("found", function (address, name) {
                 bytesWritten
               ) {
                 if (err) console.log(err);
-                btSerial.write(Buffer.from("setAutomaticMode|3|true\n", "utf-8"), function (
+                btSerial.write(Buffer.from("setAutomaticMode|3|false\n", "utf-8"), function (
                   err,
                   bytesWritten
                 ) {

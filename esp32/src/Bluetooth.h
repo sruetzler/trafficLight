@@ -145,9 +145,6 @@ actState|0815|red\n   -->  ACK|0815\n
 #include "TrafficLight.h"
 #include "BluetoothSerial.h"
 
-const String CONTROLER_VERSION = "1.0.0";
-const String PROTOCOL_VERSION = "1.0.0";
-
 class Bluetooth : public TrafficLightChanged {
     private:
         Config* m_config;
@@ -166,27 +163,29 @@ class Bluetooth : public TrafficLightChanged {
 
     private:
         void receive();
-        void onMessage(String& message);
+        void onMessage(const String& message);
 
         void sendMessage(const String& command);
-        void sendMessage(const String& command, String& param);
+        void sendMessage(const String& command, const String& param);
+        void sendMessageWithMsgId(const String& command, const String& msgId);
+        void sendMessageWithMsgId(const String& command, const String& param, const String& msgId);
         void _sendMessage(const String& message);
 
-        void version(const String& command, const String& messageId);
-        void protocolVersion(const String& command, const String& messageId, const String& param);
-        void setGreenTime(const String& command, const String& messageId, const String& param);
-        void setRedTime(const String& command, const String& messageId, const String& param);
-        void setGreenDelayTime(const String& command, const String& messageId, const String& param);
-        void getGreenTime(const String& command, const String& messageId);
-        void getRedTime(const String& command, const String& messageId);
-        void getGreenDelayTime(const String& command, const String& messageId);
-        void setButtonMode(const String& command, const String& messageId, const String& param);
-        void setAutomaticMode(const String& command, const String& messageId, const String& param);
-        void getButtonMode(const String& command, const String& messageId);
-        void getAutomaticMode(const String& command, const String& messageId);
-        void getState(const String& command, const String& messageId);
-        void setState(const String& command, const String& messageId, const String& param);
-        void toggle(const String& command, const String& messageId);
+        void version(const String& msgId);
+        void protocolVersion(const String& msgId, const String& param);
+        void setGreenTime(const String& msgId, const String& param);
+        void setRedTime(const String& msgId, const String& param);
+        void setGreenDelayTime(const String& msgId, const String& param);
+        void getGreenTime(const String& msgId);
+        void getRedTime(const String& msgId);
+        void getGreenDelayTime(const String& msgId);
+        void setButtonMode(const String& msgId, const String& param);
+        void setAutomaticMode(const String& msgId, const String& param);
+        void getButtonMode(const String& msgId);
+        void getAutomaticMode(const String& msgId);
+        void getState(const String& msgId);
+        void setState(const String& msgId, const String& param);
+        void toggle(const String& msgId);
 
 };
 

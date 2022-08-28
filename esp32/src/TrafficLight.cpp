@@ -30,22 +30,30 @@ void TrafficLight::registerTrafficLightChanged(TrafficLightChanged* trafficLight
 
 
 void TrafficLight::loop(){
-    bool actButtonValue = (!!digitalRead(REQUEST_BUTTON1)) || (!!digitalRead(REQUEST_BUTTON2));     
+    bool button1 = !!digitalRead(REQUEST_BUTTON1);
+    bool button2 = !!digitalRead(REQUEST_BUTTON2);
+    bool actButtonValue = (button1) || (button2);     
     if (m_lastButtonValue != actButtonValue){
         m_lastButtonValue = actButtonValue;
-        if (m_lastButtonValue) buttonPressed();
+        if (m_lastButtonValue){
+            if (button1) Serial.println("Button 1 pressed");
+            if (button2) Serial.println("Button 2 pressed");
+            buttonPressed();
+        }
     }
 }
 
 void TrafficLight::buttonPressed(){
+//    Serial.println("buttonPressed");
     toggle();
 }
 
 
 
-void TrafficLight::toggle(){
+String TrafficLight::toggle(){
     if (m_greenOn) setRed();
     else setGreen();
+    return m_greenOn?"green":"red";
 }
 void TrafficLight::setGreen(){
     _setGreen();
@@ -53,6 +61,11 @@ void TrafficLight::setGreen(){
 void TrafficLight::setRed(){
     _setRed();
 }
+
+bool TrafficLight::isGreen(){
+    return m_greenOn;
+}
+
 void TrafficLight::configChanged(){
 
 }

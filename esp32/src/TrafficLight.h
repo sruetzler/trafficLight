@@ -21,7 +21,8 @@ class TrafficLight {
 
         void setGreen();
         void setRed();
-        void toggle();
+        bool isGreen();
+        String toggle();
         void configChanged();
 
         void registerTrafficLightChanged(TrafficLightChanged* trafficLightChanged);
