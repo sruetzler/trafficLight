@@ -80,6 +80,9 @@ void Config::init(){
                             m_greenDelayTime = int(doc["greenDelayTime"]);
                             m_ssid = String((const char*) doc["ssid"]);
                             m_passphrase = String((const char*) doc["passphrase"]);
+                            if (m_greenTime < 1) m_greenTime = 1;
+                            if (m_redTime < 1) m_redTime = 1;
+                            if (m_greenDelayTime < 0) m_greenDelayTime = 0;
                         }
                     }
                 }
