@@ -24,7 +24,6 @@ Bluetooth::Bluetooth(Config* config, TrafficLight* trafficLight){
 
 
 void Bluetooth::stateChange(String state){
-    Serial.println("toogle");
     sendMessage("actState",state);
 }
 
@@ -87,20 +86,21 @@ void Bluetooth::onMessage(const String& message){
         else{
             String param = rest.substring(index+1);
             if (command == "version") version(msgId);
-            if (command == "protocolVersion") protocolVersion(msgId, param);
-            if (command == "setGreenTime") setGreenTime(msgId, param);
-            if (command == "setRedTime") setRedTime(msgId, param);
-            if (command == "setGreenDelayTime") setGreenDelayTime(msgId, param);
-            if (command == "getGreenTime") getGreenTime(msgId);
-            if (command == "getRedTime") getRedTime(msgId);
-            if (command == "getGreenDelayTime") getGreenDelayTime(msgId);
-            if (command == "setButtonMode") setButtonMode(msgId, param);
-            if (command == "setAutomaticMode") setAutomaticMode(msgId, param);
-            if (command == "getButtonMode") getButtonMode(msgId);
-            if (command == "getAutomaticMode") getAutomaticMode(msgId);
-            if (command == "getState") getState(msgId);
-            if (command == "setState") setState(msgId, param);
-            if (command == "toggle") toggle(msgId);
+            else if (command == "protocolVersion") protocolVersion(msgId, param);
+            else if (command == "setGreenTime") setGreenTime(msgId, param);
+            else if (command == "setRedTime") setRedTime(msgId, param);
+            else if (command == "setGreenDelayTime") setGreenDelayTime(msgId, param);
+            else if (command == "getGreenTime") getGreenTime(msgId);
+            else if (command == "getRedTime") getRedTime(msgId);
+            else if (command == "getGreenDelayTime") getGreenDelayTime(msgId);
+            else if (command == "setButtonMode") setButtonMode(msgId, param);
+            else if (command == "setAutomaticMode") setAutomaticMode(msgId, param);
+            else if (command == "getButtonMode") getButtonMode(msgId);
+            else if (command == "getAutomaticMode") getAutomaticMode(msgId);
+            else if (command == "getState") getState(msgId);
+            else if (command == "setState") setState(msgId, param);
+            else if (command == "toggle") toggle(msgId);
+            else sendMessageWithMsgId(NACK, msgId, "unknown comand:" + command);
 
         }
     }

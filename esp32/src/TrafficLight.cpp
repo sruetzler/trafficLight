@@ -80,7 +80,10 @@ void TrafficLight::buttonPressed(){
     Serial.println("buttonPressed");
     if (m_config->getEnableToggle()){
         if (m_config->getEnableAutomatic()) onTimer1();
-        else toggle();
+        else{
+            if (isGreen()) _setRed();
+            else _setGreen();
+        }
     }
     if (m_config->getEnableRequestGreen() && !isGreen()){
        startTimer2(m_config->getGreenDelayTime() * 1000);
@@ -91,7 +94,10 @@ String TrafficLight::toggle(){
     if (m_config->getEnableAutomatic()) onTimer1();
     else{
         if (isGreen()) _setRed();
-        else _setGreen();
+        else{
+            setGreen();
+            if (m_config->getEnableRequestGreen()) startTimer1(m_config->getGreenTime() * 1000);
+        } 
     }
     return isGreen()?"green":"red";
 }
